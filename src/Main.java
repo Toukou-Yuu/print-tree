@@ -11,7 +11,6 @@ import java.io.IOException;
  * @author 058gyx
  */
 public class Main {
-
     public static ApplicationContext context =
             new ClassPathXmlApplicationContext("ApplicationContext.xml");
 

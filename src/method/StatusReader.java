@@ -84,6 +84,7 @@ public class StatusReader {
         FileReader fileReader = new FileReader(path);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         Pcb pcb = new Pcb();
+
         for (int i = 0; i < 7; i++) {
             String line = bufferedReader.readLine();
             if (line.length() == 0) {

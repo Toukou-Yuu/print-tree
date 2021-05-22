@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Component
 public class PrintTree {
     @Value("0")
-    private int tabCount;
+    private int recursionDepth;
 
     /**
      * 打印进程树；
@@ -34,6 +34,9 @@ public class PrintTree {
             if (pcbList.get(i).getPid().equals("1")) {
                 ancientIndex = i;
                 System.out.println(pcbList.get(i).getName());
+                System.out.println("-Pid：" + pcbList.get(i).getPid());
+                System.out.println("-PPid：" + pcbList.get(i).getPpid());
+                System.out.println("-State：" + pcbList.get(i).getState());
             }
         }
         this.findAndPrintChildren(pcbList, ancientIndex);
@@ -42,9 +45,9 @@ public class PrintTree {
     /**
      * 递归寻找某个进程的所有子进程并输出；
      * 进程不存在孩子时，递归返回；
-     * 按照递归层数输出制表符：
-     * 每进入一层递归，制表符数量+1；
-     * 每退出一层递归，制表符数量-1
+     * 按照递归层数输出分隔符：
+     * 每进入一层递归，多输出一组分隔符；
+     * 每退出一层递归，少输出一组分隔符
      *
      * @param pcbList 所有进程所在的数组
      * @param index   进程所在数组的下标
@@ -54,33 +57,32 @@ public class PrintTree {
             return;
         }
 
-        tabCount++;
+        recursionDepth++;
         for (int i = 0; i < pcbList.get(index).getChildrenIndex().size(); i++) {
-            for (int j = 0; j < tabCount - 1; j++) {
-                System.out.print("---|--");
+            for (int j = 0; j < recursionDepth - 1; j++) {
+                System.out.print("----|");
             }
-            System.out.println("---"  + tabCount + "级->" + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getName()
-//                    + "\n" + printTab(tabCount) + "----Pid："
-//                    + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getPid()
-//                    + "\n" + printTab(tabCount) + "----PPid："
-//                    + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getPpid()
-//                    + "\n" + printTab(tabCount) + "----State："
-//                    + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getState()
-            );
-
+            System.out.print("----" + recursionDepth + "级->");
+            System.out.println(pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getName());
+            System.out.print(printTab(recursionDepth) + "---Pid：");
+            System.out.println(pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getPid());
+            System.out.print(printTab(recursionDepth) + "---PPid：");
+            System.out.println(pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getPpid());
+            System.out.print(printTab(recursionDepth) + "---State：");
+            System.out.println(pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getState());
             findAndPrintChildren(pcbList, pcbList.get(index).getChildrenIndex().get(i));
         }
-        tabCount--;
+        recursionDepth--;
     }
 
     /**
-     * 输出制表符调整结构
+     * 输出分隔符调整结构
      *
-     * @param tabCount 制表符数量
-     * @return 制表符
+     * @param recursionDepth 递归层数
+     * @return 分隔符
      */
-    private String printTab(int tabCount) {
-        return "----|".repeat(Math.max(0, tabCount)) +
-                "--- ";
+    private String printTab(int recursionDepth) {
+        return "----|".repeat(Math.max(0, recursionDepth)) +
+                "--";
     }
 }
