@@ -22,7 +22,6 @@ public class PrintTree {
      * @param pcbList 所有进程所在数组
      */
     public void print(ArrayList<Pcb> pcbList) {
-
         for (int i = 0; i < pcbList.size(); i++) {
             for (int j = 0; j < pcbList.size(); j++) {
                 if (pcbList.get(i).getPid().equals(pcbList.get(j).getPpid())) {
@@ -30,7 +29,6 @@ public class PrintTree {
                 }
             }
         }
-
         int ancientIndex = 0;
         for (int i = 0; i < pcbList.size(); i++) {
             if (pcbList.get(i).getPid().equals("1")) {
@@ -59,14 +57,14 @@ public class PrintTree {
         tabCount++;
         for (int i = 0; i < pcbList.get(index).getChildrenIndex().size(); i++) {
             for (int j = 0; j < tabCount - 1; j++) {
-                System.out.print("\t|----");
+                System.out.print("---|--");
             }
-            System.out.println("\t" + " " + tabCount + "级-->" + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getName()
-//                    + "\n" + printTab(tabCount) + "\t Pid："
+            System.out.println("---"  + tabCount + "级->" + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getName()
+//                    + "\n" + printTab(tabCount) + "----Pid："
 //                    + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getPid()
-//                    + "\n" + printTab(tabCount) + "\t PPid："
+//                    + "\n" + printTab(tabCount) + "----PPid："
 //                    + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getPpid()
-//                    + "\n" + printTab(tabCount) + "\t State："
+//                    + "\n" + printTab(tabCount) + "----State："
 //                    + pcbList.get(pcbList.get(index).getChildrenIndex().get(i)).getState()
             );
 
@@ -82,7 +80,7 @@ public class PrintTree {
      * @return 制表符
      */
     private String printTab(int tabCount) {
-        return "\t|".repeat(Math.max(0, tabCount)) +
-                "\t ";
+        return "----|".repeat(Math.max(0, tabCount)) +
+                "--- ";
     }
 }

@@ -8,16 +8,12 @@ import java.util.ArrayList;
 public class Pcb {
     //所有进程所在的数组
     public static ArrayList<Pcb> pcbList = new ArrayList<>();
-    //进程名
-    private String name;
-    //进程pid
-    private String pid;
-    //该进程的父进程pid
-    private String ppid;
-    //该进程的状态
-    private String state;
-    //该进程所有的孩子进程在进程数组中的索引
+    //孩子索引
     private final ArrayList<Integer> childrenIndex;
+    private String name;
+    private String pid;
+    private String ppid;
+    private String state;
 
     /**
      * @return 该进程的孩子索引数组

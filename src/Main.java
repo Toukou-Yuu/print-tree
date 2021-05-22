@@ -23,6 +23,5 @@ public class Main {
         statusReader.findAllStatus(srcFile);
         System.out.println("进程数量：" + Pcb.pcbList.size());
         printTree.print(Pcb.pcbList);
-
     }
 }
