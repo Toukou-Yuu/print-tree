@@ -4,57 +4,147 @@ import java.util.ArrayList;
 
 /**
  * @author 058gyx
+ * @version Spring
  */
-public class Pcb {
-    //所有进程所在的数组
-    public static ArrayList<Pcb> pcbList = new ArrayList<>();
-    //孩子索引
-    private final ArrayList<Integer> childrenIndex;
+class Pcb {
+    private final ArrayList<Integer> childrenIndexList;
     private String name;
     private String pid;
     private String ppid;
     private String state;
 
     /**
-     * @return 该进程的孩子索引数组
+     * 无参构造函数
      */
-    public ArrayList<Integer> getChildrenIndex() {
-        return childrenIndex;
-    }
-
     public Pcb() {
-        childrenIndex = new ArrayList<>();
+        childrenIndexList = new ArrayList<>();
+        name = null;
+        pid = null;
+        ppid = null;
+        state = null;
     }
 
-    public String getName() {
-        return name;
+    /**
+     * 传入一个孩子数组的下标，得到该子进程在进程数组中的位置，再返回该子进程
+     *
+     * @param indexInChildrenList 孩子数组下标
+     * @return 子进程
+     */
+    public Pcb getChildInPcbList(int indexInChildrenList) {
+        int childLocation = childrenIndexList.get(indexInChildrenList);
+        return Main.pcbList.get(childLocation);
     }
 
-    public String getPid() {
-        return pid;
+    /**
+     * 传入子进程在孩子数组中的下标，找到该子进程在进程数组中的位置并获得其对象，
+     * 最后返回进程名称
+     *
+     * @param indexInChildrenList 子进程在孩子数组中的下标
+     * @return 该子进程的名称
+     */
+    public String getChildName(int indexInChildrenList) {
+        return getChildInPcbList(indexInChildrenList).getField("Name");
     }
 
-    public String getPpid() {
-        return ppid;
+    /**
+     * 传入子进程在孩子数组中的下标，找到该子进程在进程数组中的位置并获得其对象，
+     * 最后返回进程Pid
+     *
+     * @param indexInChildrenList 子进程在孩子数组中的下标
+     * @return 该子进程的Pid
+     */
+    public String getChildPid(int indexInChildrenList) {
+        return getChildInPcbList(indexInChildrenList).getField("Pid");
     }
 
-    public String getState() {
-        return state;
+    /**
+     * 传入子进程在孩子数组中的下标，找到该子进程在进程数组中的位置并获得其对象，
+     * 最后返回进程Ppid
+     *
+     * @param indexInChildrenList 子进程在孩子数组中的下标
+     * @return 该子进程的Ppid
+     */
+    public String getChildPpid(int indexInChildrenList) {
+        return getChildInPcbList(indexInChildrenList).getField("PPid");
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * 传入子进程在孩子数组中的下标，找到该子进程在进程数组中的位置并获得其对象，
+     * 最后返回进程State
+     *
+     * @param indexInChildrenList 子进程在孩子数组中的下标
+     * @return 该子进程的Ppid
+     */
+    public String getChildState(int indexInChildrenList) {
+        return getChildInPcbList(indexInChildrenList).getField("State");
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    /**
+     * 向父进程的孩子数组中添加子进程在进程数组中的索引
+     *
+     * @param location 该子进程在进程数组中的位置
+     */
+    public void addChildIndex(int location) {
+        childrenIndexList.add(location);
     }
 
-    public void setPpid(String ppid) {
-        this.ppid = ppid;
+    /**
+     * 传入孩子数组中的下标，返回该子进程在进程数组中的下标
+     *
+     * @param indexInChildrenList 孩子数组中的下标
+     * @return 子进程在进程数组中的下标
+     */
+    public int getChildIndexInPcbList(int indexInChildrenList) {
+        return childrenIndexList.get(indexInChildrenList);
     }
 
-    public void setState(String state) {
-        this.state = state;
+    /**
+     * 传入父进程在进程数组中的下标，得到该父进程的孩子数组，再返回其孩子数组的长度
+     *
+     * @return 子进程数量
+     */
+    public int getChildrenListSize() {
+        return childrenIndexList.size();
+    }
+
+    /**
+     * 传入需要获取的属性，返回该对象的属性值
+     *
+     * @param filed 需要获取的属性名
+     * @return Pcb对象的某一个属性值
+     */
+    public String getField(String filed) {
+        switch (filed) {
+            case "Name" -> {
+                return name;
+            }
+            case "Pid" -> {
+                return pid;
+            }
+            case "PPid" -> {
+                return ppid;
+            }
+            case "State" -> {
+                return state;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    /**
+     * 设置属性名和对应的属性值
+     *
+     * @param filed 需要设置的属性名
+     * @param value 对应属性需要设置的属性值
+     */
+    public void setField(String filed, String value) {
+        switch (filed) {
+            case "Name" -> this.name = value;
+            case "Pid" -> this.pid = value;
+            case "PPid" -> this.ppid = value;
+            case "State" -> this.state = value;
+        }
     }
 }
