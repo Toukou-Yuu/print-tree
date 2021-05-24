@@ -1,15 +1,9 @@
 package method;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 /**
  * @author 058gyx
- * @version Spring
  */
-@Component
 class PrintTree {
-    @Value("0")
     private int depth;
 
     /**

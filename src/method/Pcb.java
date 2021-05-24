@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 /**
  * @author 058gyx
- * @version Spring
  */
 class Pcb {
     private final ArrayList<Integer> childrenIndexList;

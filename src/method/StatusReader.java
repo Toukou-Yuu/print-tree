@@ -1,16 +1,12 @@
 package method;
 
-import org.springframework.stereotype.Component;
-
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * @author 058gyx
- * @version Spring
  */
-@Component
 class StatusReader {
     /**
      * 筛选有效目录并递归寻找有效目录下所有的status文件
